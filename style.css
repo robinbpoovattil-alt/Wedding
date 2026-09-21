@@ -233,48 +233,105 @@ footer{border-top:1px solid var(--line);padding:40px 5vw;display:flex;justify-co
 }
 
 
-/* Carousel v4: mobile-safe portrait frames — always show the complete 2:3 photo */
-.photo-carousel{height:min(720px,72vw);min-height:560px;position:relative;overflow:hidden;perspective:none;background:transparent}
-.carousel-stage{position:relative;width:100%;height:100%;transform:none!important}
-.carousel-stage img,
-.carousel-stage img.is-center,
-.carousel-stage img.is-prev,
-.carousel-stage img.is-next,
-.carousel-stage img.is-far-prev,
-.carousel-stage img.is-far-next{
-  position:absolute!important;left:50%!important;top:50%!important;
-  width:min(420px,48vw)!important;height:min(630px,72vw)!important;
-  max-width:calc(100% - 110px)!important;max-height:calc(100% - 40px)!important;
-  aspect-ratio:2/3!important;
-  object-fit:contain!important;object-position:center!important;
-  padding:0!important;border:0!important;background:#fffaf3!important;
-  box-shadow:0 20px 48px rgba(57,41,25,.18)!important;
-  transform:translate(-50%,-50%)!important;
-  opacity:0!important;visibility:hidden!important;filter:none!important;
-  z-index:1!important;pointer-events:none!important;
-  transition:opacity .3s ease!important;
+/* Carousel v5: true single-frame carousel — no overlapping images on mobile */
+.photo-carousel{
+  position:relative;
+  width:100%;
+  min-height:0;
+  padding:0 64px 34px;
+  overflow:hidden;
+  background:transparent;
+  touch-action:pan-y;
+  cursor:grab;
 }
-.carousel-stage img.is-center{opacity:1!important;visibility:visible!important;z-index:3!important}
-.carousel-arrow{z-index:8}
+.photo-carousel:active{cursor:grabbing}
+.carousel-stage{
+  position:relative;
+  width:100%;
+  height:auto;
+  min-height:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transform:none!important;
+}
+.carousel-stage img{
+  display:none!important;
+  position:relative!important;
+  inset:auto!important;
+  width:auto!important;
+  height:auto!important;
+  max-width:100%!important;
+  max-height:none!important;
+  aspect-ratio:2/3!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  margin:0 auto!important;
+  padding:0!important;
+  border:0!important;
+  background:#fffaf3!important;
+  box-shadow:0 20px 48px rgba(57,41,25,.18)!important;
+  transform:none!important;
+  opacity:0!important;
+  visibility:hidden!important;
+  filter:none!important;
+  z-index:auto!important;
+  pointer-events:none!important;
+  transition:opacity .25s ease!important;
+}
+.carousel-stage img.is-center{
+  display:block!important;
+  width:min(420px,100%)!important;
+  height:auto!important;
+  max-height:630px!important;
+  opacity:1!important;
+  visibility:visible!important;
+}
+.carousel-arrow{
+  position:absolute;
+  top:50%;
+  z-index:8;
+  width:48px;
+  height:48px;
+  border:1px solid rgba(41,38,32,.3);
+  border-radius:50%;
+  background:rgba(250,247,242,.92);
+  color:var(--ink);
+  font:28px var(--serif);
+  display:grid;
+  place-items:center;
+  cursor:pointer;
+  transform:translateY(-50%);
+}
+.carousel-prev{left:8px}.carousel-next{right:8px}
+.carousel-meta{
+  position:absolute;
+  z-index:8;
+  bottom:0;
+  left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  gap:18px;
+  align-items:center;
+  color:var(--muted);
+  font-size:8px;
+  letter-spacing:.2em;
+  white-space:nowrap;
+}
+.carousel-count{font:400 19px var(--serif);color:var(--ink);letter-spacing:.04em}
 @media(max-width:800px){
-  /* Give the image its natural portrait proportions instead of forcing it into a short box. */
   .photo-carousel{
-    height:calc(100vw + 85px);
-    min-height:0;
-    max-height:none;
+    padding:0 48px 34px;
   }
-  .carousel-stage img,
-  .carousel-stage img.is-center,
-  .carousel-stage img.is-prev,
-  .carousel-stage img.is-next,
-  .carousel-stage img.is-far-prev,
-  .carousel-stage img.is-far-next{
-    width:min(62vw,260px)!important;
-    height:min(93vw,390px)!important;
-    max-width:calc(100% - 82px)!important;
-    max-height:calc(100% - 42px)!important;
-    aspect-ratio:2/3!important;
-    object-fit:contain!important;
+  .carousel-stage img.is-center{
+    width:min(100%,260px)!important;
+    max-height:none!important;
   }
-  .carousel-arrow{width:42px;height:42px}
+  .carousel-arrow{
+    width:40px;
+    height:40px;
+    font-size:23px;
+  }
+  .carousel-prev{left:3px}.carousel-next{right:3px}
+  .carousel-meta{bottom:0}
 }
