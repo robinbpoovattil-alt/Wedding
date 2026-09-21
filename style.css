@@ -77,8 +77,17 @@ blockquote{font:400 clamp(40px,6vw,78px)/.92 var(--serif);margin:0;position:rela
 .rsvp{min-height:75vh;display:grid;place-items:center;text-align:center;position:relative;overflow:hidden}.rsvp-glow{position:absolute;width:55vw;height:55vw;border-radius:50%;background:radial-gradient(circle,rgba(190,166,150,.2),transparent 65%);filter:blur(5px)}
 .rsvp h2{position:relative;margin-bottom:30px}.rsvp p:not(.eyebrow){position:relative;color:var(--muted);font:400 18px/1.5 var(--serif);margin-bottom:35px}
 footer{border-top:1px solid var(--line);padding:40px 5vw;display:flex;justify-content:space-between;align-items:center;font-size:8px;letter-spacing:.25em;color:var(--muted)}.footer-monogram{font:400 25px var(--serif);color:var(--ink);letter-spacing:.05em}.footer-monogram span{font-family:var(--script)}
-.reveal,.reveal-scale{opacity:0;transform:translateY(45px);transition:opacity 1.1s cubic-bezier(.2,.7,.2,1),transform 1.1s cubic-bezier(.2,.7,.2,1)}
-.reveal-scale{transform:translateY(35px) scale(.97)}.reveal.is-visible,.reveal-scale.is-visible{opacity:1;transform:none}
+.reveal,.reveal-scale{
+  opacity:1;
+  transform:none;
+  transition:opacity 1.1s cubic-bezier(.2,.7,.2,1),
+             transform 1.1s cubic-bezier(.2,.7,.2,1)
+}
+
+.reveal.is-visible,.reveal-scale.is-visible{
+  opacity:1;
+  transform:none
+}
 @keyframes pulse{0%,100%{opacity:.25;transform:scaleY(.7);transform-origin:top}50%{opacity:1;transform:scaleY(1)}}
 @keyframes spin{to{transform:rotate(360deg)}}
 @media(max-width:800px){
