@@ -54,3 +54,12 @@ function updateCountdown(){
   document.querySelector('[data-unit="seconds"]').textContent=String(seconds).padStart(2,'0');
 }
 updateCountdown(); setInterval(updateCountdown,1000);
+
+// Milestone accordions remain independent so each chapter can be explored at will.
+document.querySelectorAll('[data-milestone]').forEach(milestone => {
+  const toggle = milestone.querySelector('.milestone-toggle');
+  toggle.addEventListener('click', () => {
+    const isOpen = milestone.classList.toggle('is-open');
+    toggle.setAttribute('aria-expanded', String(isOpen));
+  });
+});
