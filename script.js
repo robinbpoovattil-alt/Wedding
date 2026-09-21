@@ -44,14 +44,16 @@ makePetals();
 const wedding = new Date('2026-11-28T10:30:00+05:30');
 function updateCountdown(){
   const diff = Math.max(0, wedding - new Date());
-  const days = Math.floor(diff/86400000);
-  const hours = Math.floor(diff%86400000/3600000);
-  const minutes = Math.floor(diff%3600000/60000);
-  const seconds = Math.floor(diff%60000/1000);
-  document.querySelector('[data-unit="days"]').textContent=days;
-  document.querySelector('[data-unit="hours"]').textContent=String(hours).padStart(2,'0');
-  document.querySelector('[data-unit="minutes"]').textContent=String(minutes).padStart(2,'0');
-  document.querySelector('[data-unit="seconds"]').textContent=String(seconds).padStart(2,'0');
+  const days = Math.floor(diff / 86400000);
+  const hours = Math.floor((diff % 86400000) / 3600000);
+  const minutes = Math.floor((diff % 3600000) / 60000);
+  const seconds = Math.floor((diff % 60000) / 1000);
+
+  // Update every countdown on the page (hero + Save the Date).
+  document.querySelectorAll('[data-unit="days"]').forEach(el => el.textContent = days);
+  document.querySelectorAll('[data-unit="hours"]').forEach(el => el.textContent = String(hours).padStart(2,'0'));
+  document.querySelectorAll('[data-unit="minutes"]').forEach(el => el.textContent = String(minutes).padStart(2,'0'));
+  document.querySelectorAll('[data-unit="seconds"]').forEach(el => el.textContent = String(seconds).padStart(2,'0'));
 }
 updateCountdown(); setInterval(updateCountdown,1000);
 
