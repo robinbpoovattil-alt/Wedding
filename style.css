@@ -1,0 +1,77 @@
+
+
+/* Photography + motion enhancements */
+.hero-bg{
+  background-size:cover;
+  background-position:center 42%;
+  background-repeat:no-repeat;
+}
+.hero-bg:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg,rgba(15,12,10,.18),rgba(15,12,10,.28) 55%,rgba(15,12,10,.62));
+}
+.image-frame{
+  background:#d8d0c7;
+  overflow:hidden;
+}
+.image-frame:before{display:none}
+.image-frame img{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
+  object-position:center;
+  transition:transform 1.4s cubic-bezier(.2,.7,.2,1),filter 1.4s ease;
+  will-change:transform;
+}
+.image-frame:hover img{transform:scale(1.045)}
+.story-intro,.gallery-intro{
+  max-width:620px;
+  margin:26px auto 0;
+  color:var(--muted);
+  font:400 18px/1.55 var(--serif);
+}
+.story-heading .story-intro{text-align:left;margin-left:0}
+.reveal,.reveal-scale{
+  opacity:0;
+  transform:translateY(28px);
+}
+.reveal-scale{transform:translateY(38px) scale(.985)}
+.reveal.is-visible,.reveal-scale.is-visible{
+  opacity:1;
+  transform:none;
+}
+.gallery-track{
+  grid-template-columns:repeat(12,1fr);
+  grid-auto-rows:22px;
+  gap:18px;
+  align-items:stretch;
+}
+.gallery-item{
+  min-height:0;
+  height:auto!important;
+  margin:0;
+}
+.gallery-item:nth-child(1){grid-column:span 3;grid-row:span 24}
+.gallery-item:nth-child(2){grid-column:span 4;grid-row:span 19}
+.gallery-item:nth-child(3){grid-column:span 3;grid-row:span 18}
+.gallery-item:nth-child(4){grid-column:span 2;grid-row:span 25}
+.gallery-item:nth-child(5){grid-column:span 4;grid-row:span 19}
+.gallery-item:nth-child(6){grid-column:span 3;grid-row:span 16}
+.gallery-item:nth-child(7){grid-column:span 3;grid-row:span 22}
+.gallery-item:nth-child(8){grid-column:span 2;grid-row:span 18}
+.gallery-item:nth-child(9){grid-column:span 4;grid-row:span 20}
+.gallery-item:nth-child(10){grid-column:span 3;grid-row:span 24}
+@media(max-width:800px){
+  .story-intro{font-size:17px}
+  .gallery-track{
+    grid-template-columns:repeat(2,1fr);
+    grid-auto-rows:8px;
+    gap:12px;
+  }
+  .gallery-item:nth-child(n){grid-column:auto;grid-row:auto;height:420px!important}
+  .gallery-item:nth-child(2n){height:320px!important}
+  .gallery-item:nth-child(3n){height:360px!important}
+}
