@@ -233,7 +233,7 @@ footer{border-top:1px solid var(--line);padding:40px 5vw;display:flex;justify-co
 }
 
 
-/* Carousel v3: intentionally simple and stable — one complete portrait at a time */
+/* Carousel v4: mobile-safe portrait frames — always show the complete 2:3 photo */
 .photo-carousel{height:min(720px,72vw);min-height:560px;position:relative;overflow:hidden;perspective:none;background:transparent}
 .carousel-stage{position:relative;width:100%;height:100%;transform:none!important}
 .carousel-stage img,
@@ -243,8 +243,9 @@ footer{border-top:1px solid var(--line);padding:40px 5vw;display:flex;justify-co
 .carousel-stage img.is-far-prev,
 .carousel-stage img.is-far-next{
   position:absolute!important;left:50%!important;top:50%!important;
-  width:min(420px,48vw)!important;height:min(620px,66vw)!important;
+  width:min(420px,48vw)!important;height:min(630px,72vw)!important;
   max-width:calc(100% - 110px)!important;max-height:calc(100% - 40px)!important;
+  aspect-ratio:2/3!important;
   object-fit:contain!important;object-position:center!important;
   padding:0!important;border:0!important;background:#fffaf3!important;
   box-shadow:0 20px 48px rgba(57,41,25,.18)!important;
@@ -256,16 +257,24 @@ footer{border-top:1px solid var(--line);padding:40px 5vw;display:flex;justify-co
 .carousel-stage img.is-center{opacity:1!important;visibility:visible!important;z-index:3!important}
 .carousel-arrow{z-index:8}
 @media(max-width:800px){
-  .photo-carousel{height:calc(100vw + 90px);min-height:460px}
+  /* Give the image its natural portrait proportions instead of forcing it into a short box. */
+  .photo-carousel{
+    height:calc(100vw + 85px);
+    min-height:0;
+    max-height:none;
+  }
   .carousel-stage img,
   .carousel-stage img.is-center,
   .carousel-stage img.is-prev,
   .carousel-stage img.is-next,
   .carousel-stage img.is-far-prev,
   .carousel-stage img.is-far-next{
-    width:calc(100% - 82px)!important;
-    height:calc(100% - 55px)!important;
-    max-width:none!important;max-height:none!important;
+    width:min(62vw,260px)!important;
+    height:min(93vw,390px)!important;
+    max-width:calc(100% - 82px)!important;
+    max-height:calc(100% - 42px)!important;
+    aspect-ratio:2/3!important;
+    object-fit:contain!important;
   }
   .carousel-arrow{width:42px;height:42px}
 }
