@@ -54,3 +54,60 @@ function updateCountdown(){
   document.querySelector('[data-unit="seconds"]').textContent=String(seconds).padStart(2,'0');
 }
 updateCountdown(); setInterval(updateCountdown,1000);
+
+// Milestone accordions remain independent so each chapter can be explored at will.
+document.querySelectorAll('[data-milestone]').forEach(milestone => {
+  const toggle = milestone.querySelector('.milestone-toggle');
+  toggle.addEventListener('click', () => {
+    const isOpen = milestone.classList.toggle('is-open');
+    toggle.setAttribute('aria-expanded', String(isOpen));
+  });
+});
+
+document.querySelectorAll('[data-carousel]').forEach(carousel => {
+  const stage = carousel.querySelector('.carousel-stage');
+  const photos = stage.querySelectorAll('img');
+  let rotation = 0;
+  let startX = 0;
+  let dragRotation = 0;
+
+  photos.forEach((photo, index) => photo.style.setProperty('--i', index));
+
+  function render() {
+    stage.style.transform = `rotateY(${rotation}deg)`;
+  }
+
+  function rotateBy(amount) {
+    rotation += amount;
+    render();
+  }
+
+  carousel.addEventListener('pointerdown', event => {
+    startX = event.clientX;
+    dragRotation = rotation;
+    carousel.setPointerCapture(event.pointerId);
+    stage.style.transition = 'none';
+  });
+
+  carousel.addEventListener('pointermove', event => {
+    if (!carousel.hasPointerCapture(event.pointerId)) return;
+    rotation = dragRotation + (event.clientX - startX) * .35;
+    render();
+  });
+
+  function endDrag(event) {
+    if (!carousel.hasPointerCapture(event.pointerId)) return;
+    carousel.releasePointerCapture(event.pointerId);
+    rotation = Math.round(rotation / 18) * 18;
+    stage.style.transition = '';
+    render();
+  }
+
+  carousel.addEventListener('pointerup', endDrag);
+  carousel.addEventListener('pointercancel', endDrag);
+  carousel.addEventListener('keydown', event => {
+    if (event.key === 'ArrowLeft') { event.preventDefault(); rotateBy(18); }
+    if (event.key === 'ArrowRight') { event.preventDefault(); rotateBy(-18); }
+  });
+  render();
+});
