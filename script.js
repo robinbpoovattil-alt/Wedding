@@ -127,3 +127,44 @@ document.querySelectorAll('[data-carousel]').forEach(carousel => {
 
   render();
 });
+
+
+// Dedicated mobile photo viewer
+document.querySelectorAll('[data-mobile-frames]').forEach(viewer => {
+  const track = viewer.querySelector('.mobile-frame-track');
+  const photos = [...track.querySelectorAll('img')];
+  const prev = viewer.querySelector('.mobile-frame-prev');
+  const next = viewer.querySelector('.mobile-frame-next');
+  const count = viewer.querySelector('.mobile-frame-count');
+  let index = 0;
+  let startX = 0;
+  let dragging = false;
+
+  function renderMobileFrame(){
+    track.style.transform = `translateX(-${index * 100}%)`;
+    if(count) count.textContent = String(index + 1).padStart(2,'0') + ' / ' + String(photos.length).padStart(2,'0');
+  }
+  function goMobileFrame(step){
+    index = (index + step + photos.length) % photos.length;
+    renderMobileFrame();
+  }
+
+  prev?.addEventListener('click', e => { e.stopPropagation(); goMobileFrame(-1); });
+  next?.addEventListener('click', e => { e.stopPropagation(); goMobileFrame(1); });
+
+  viewer.addEventListener('pointerdown', e => {
+    if(e.target.closest('button')) return;
+    dragging = true;
+    startX = e.clientX;
+    viewer.setPointerCapture?.(e.pointerId);
+  });
+  viewer.addEventListener('pointerup', e => {
+    if(!dragging) return;
+    dragging = false;
+    const dx = e.clientX - startX;
+    if(Math.abs(dx) > 45) goMobileFrame(dx < 0 ? 1 : -1);
+  });
+  viewer.addEventListener('pointercancel', () => { dragging = false; });
+
+  renderMobileFrame();
+});
