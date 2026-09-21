@@ -231,3 +231,41 @@ footer{border-top:1px solid var(--line);padding:40px 5vw;display:flex;justify-co
 @media(prefers-reduced-motion:reduce){
   .carousel-stage img,.carousel-arrow{transition:none}
 }
+
+
+/* Carousel v3: intentionally simple and stable — one complete portrait at a time */
+.photo-carousel{height:min(720px,72vw);min-height:560px;position:relative;overflow:hidden;perspective:none;background:transparent}
+.carousel-stage{position:relative;width:100%;height:100%;transform:none!important}
+.carousel-stage img,
+.carousel-stage img.is-center,
+.carousel-stage img.is-prev,
+.carousel-stage img.is-next,
+.carousel-stage img.is-far-prev,
+.carousel-stage img.is-far-next{
+  position:absolute!important;left:50%!important;top:50%!important;
+  width:min(420px,48vw)!important;height:min(620px,66vw)!important;
+  max-width:calc(100% - 110px)!important;max-height:calc(100% - 40px)!important;
+  object-fit:contain!important;object-position:center!important;
+  padding:0!important;border:0!important;background:#fffaf3!important;
+  box-shadow:0 20px 48px rgba(57,41,25,.18)!important;
+  transform:translate(-50%,-50%)!important;
+  opacity:0!important;visibility:hidden!important;filter:none!important;
+  z-index:1!important;pointer-events:none!important;
+  transition:opacity .3s ease!important;
+}
+.carousel-stage img.is-center{opacity:1!important;visibility:visible!important;z-index:3!important}
+.carousel-arrow{z-index:8}
+@media(max-width:800px){
+  .photo-carousel{height:calc(100vw + 90px);min-height:460px}
+  .carousel-stage img,
+  .carousel-stage img.is-center,
+  .carousel-stage img.is-prev,
+  .carousel-stage img.is-next,
+  .carousel-stage img.is-far-prev,
+  .carousel-stage img.is-far-next{
+    width:calc(100% - 82px)!important;
+    height:calc(100% - 55px)!important;
+    max-width:none!important;max-height:none!important;
+  }
+  .carousel-arrow{width:42px;height:42px}
+}
