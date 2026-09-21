@@ -66,48 +66,62 @@ document.querySelectorAll('[data-milestone]').forEach(milestone => {
 
 document.querySelectorAll('[data-carousel]').forEach(carousel => {
   const stage = carousel.querySelector('.carousel-stage');
-  const photos = stage.querySelectorAll('img');
-  let rotation = 0;
+  const photos = [...stage.querySelectorAll('img')];
+  const prev = carousel.querySelector('.carousel-prev');
+  const next = carousel.querySelector('.carousel-next');
+  const count = carousel.querySelector('.carousel-count');
+  let index = 0;
   let startX = 0;
-  let dragRotation = 0;
+  let dragging = false;
 
-  photos.forEach((photo, index) => photo.style.setProperty('--i', index));
+  function wrap(value) {
+    return (value + photos.length) % photos.length;
+  }
 
   function render() {
-    stage.style.transform = `rotateY(${rotation}deg)`;
+    const n = photos.length;
+    photos.forEach((photo, i) => {
+      photo.className = '';
+      const d = (i - index + n) % n;
+      if (d === 0) photo.classList.add('is-center');
+      else if (d === 1) photo.classList.add('is-next');
+      else if (d === n - 1) photo.classList.add('is-prev');
+      else if (d === 2) photo.classList.add('is-far-next');
+      else if (d === n - 2) photo.classList.add('is-far-prev');
+    });
+    if(count) count.textContent = String(index + 1).padStart(2,'0') + ' / ' + String(n).padStart(2,'0');
   }
 
-  function rotateBy(amount) {
-    rotation += amount;
+  function go(step) {
+    index = wrap(index + step);
     render();
   }
+
+  prev?.addEventListener('click', e => { e.stopPropagation(); go(-1); });
+  next?.addEventListener('click', e => { e.stopPropagation(); go(1); });
 
   carousel.addEventListener('pointerdown', event => {
+    if(event.target.closest('.carousel-arrow')) return;
+    dragging = true;
     startX = event.clientX;
-    dragRotation = rotation;
     carousel.setPointerCapture(event.pointerId);
-    stage.style.transition = 'none';
   });
 
-  carousel.addEventListener('pointermove', event => {
-    if (!carousel.hasPointerCapture(event.pointerId)) return;
-    rotation = dragRotation + (event.clientX - startX) * .35;
-    render();
+  carousel.addEventListener('pointerup', event => {
+    if(!dragging) return;
+    dragging = false;
+    const dx = event.clientX - startX;
+    if(Math.abs(dx) > 45) go(dx < 0 ? 1 : -1);
   });
 
-  function endDrag(event) {
-    if (!carousel.hasPointerCapture(event.pointerId)) return;
-    carousel.releasePointerCapture(event.pointerId);
-    rotation = Math.round(rotation / 18) * 18;
-    stage.style.transition = '';
-    render();
-  }
+  carousel.addEventListener('pointercancel', () => { dragging = false; });
 
-  carousel.addEventListener('pointerup', endDrag);
-  carousel.addEventListener('pointercancel', endDrag);
   carousel.addEventListener('keydown', event => {
-    if (event.key === 'ArrowLeft') { event.preventDefault(); rotateBy(18); }
-    if (event.key === 'ArrowRight') { event.preventDefault(); rotateBy(-18); }
+    if(event.key === 'ArrowLeft'){ event.preventDefault(); go(-1); }
+    if(event.key === 'ArrowRight'){ event.preventDefault(); go(1); }
+    if(event.key === 'Home'){ event.preventDefault(); index=0; render(); }
+    if(event.key === 'End'){ event.preventDefault(); index=photos.length-1; render(); }
   });
+
   render();
 });
