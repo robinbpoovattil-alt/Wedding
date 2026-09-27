@@ -20,23 +20,25 @@
   </header>
 
   <main id="top">
-    <section class="hero">
-      <div class="hero-image" role="img" aria-label="Robin and Shresta together" style="background-image:url('assets/photos/robin-hero.jpg')"></div>
+    <section class="hero" data-parallax-section>
+      <div class="hero-image parallax-media" data-parallax="0.18" role="img" aria-label="Robin and Shresta together" style="background-image:url('assets/photos/robin-hero.jpg')"></div>
       <div class="hero-shade"></div>
       <div class="hero-content">
-        <p class="micro">28 · NOVEMBER · 2026</p>
-        <h1>Robin <i>&amp;</i> Shresta</h1>
-        <p class="hero-sub">are getting married</p>
+        <p class="micro hero-micro" data-reveal-words>28 · NOVEMBER · 2026</p>
+        <h1 class="hero-title" data-letter-reveal>Robin <i>&amp;</i> Shresta</h1>
+        <p class="hero-sub" data-reveal-words>are getting married</p>
         <div class="hero-rule"></div>
-        <p class="hero-note">A day for love, family &amp; forever.</p>
+        <p class="hero-note" data-reveal-words>A day for love, family &amp; forever.</p>
       </div>
       <a class="scroll" href="#invitation"><span>Scroll to begin</span><b></b></a>
     </section>
 
+    <div class="date-ribbon" aria-hidden="true"><span>28 NOVEMBER 2026</span></div>
+
     <section id="invitation" class="invitation section">
       <div class="narrow reveal">
         <p class="eyebrow">YOU'RE INVITED</p>
-        <h2>Together with our families,<br>we invite you to celebrate<br><em>the beginning of our forever.</em></h2>
+        <h2 data-reveal-words>Together with our families,<br>we invite you to celebrate<br><em>the beginning of our forever.</em></h2>
         <div class="names">
           <span>Dr. Robin B Poovattil</span>
           <b>&amp;</b>
@@ -45,7 +47,7 @@
       </div>
     </section>
 
-    <section class="date section">
+    <section class="date section" data-parallax-section>
       <div class="date-inner reveal">
         <p class="eyebrow">SAVE THE DATE</p>
         <div class="date-lockup">
@@ -60,7 +62,7 @@
           <div><b data-unit="seconds">—</b><span>seconds</span></div>
         </div>
       </div>
-      <div class="detail-photos reveal-scale">
+      <div class="detail-photos reveal-scale parallax-stack" data-parallax="0.08">
         <figure class="detail-photo">
           <img src="assets/photos/robin-detail.jpg" alt="Mehendi-covered hands" loading="lazy">
         </figure>
@@ -70,15 +72,15 @@
       </div>
     </section>
 
-    <section class="cinematic">
-      <img src="assets/photos/robin-cinematic.jpg" alt="Robin and Shresta together" loading="lazy">
-      <div class="cinematic-copy reveal">
+    <section class="cinematic" data-parallax-section>
+      <img class="parallax-media" data-parallax="0.12" src="assets/photos/robin-cinematic.jpg" alt="Robin and Shresta together" loading="lazy">
+      <div class="cinematic-copy reveal" data-parallax="0.04">
         <p>Somewhere along the way,<br><em>we became us.</em></p>
       </div>
     </section>
 
-    <section id="wedding-day" class="day section">
-      <div class="day-intro reveal">
+    <section id="wedding-day" class="day section" data-timeline>
+      <div class="day-intro reveal" data-reveal-words>
         <p class="eyebrow">THE WEDDING DAY</p>
         <h2>Two moments.<br><em>One beautiful beginning.</em></h2>
       </div>
@@ -110,19 +112,21 @@
       </article>
     </section>
 
-    <section class="interlude">
-      <div class="interlude-image"><img src="assets/photos/robin-embrace.jpg" alt="A quiet moment together" loading="lazy"></div>
+    <section class="interlude" data-parallax-section>
+      <div class="interlude-image parallax-media" data-parallax="0.1"><img src="assets/photos/robin-embrace.jpg" alt="A quiet moment together" loading="lazy"></div>
       <p class="interlude-text reveal">And so, together,<br><em>we begin.</em></p>
     </section>
 
-    <section id="rsvp" class="rsvp section">
-      <div class="rsvp-image"><img src="assets/photos/robin-final.jpg" alt="A celebration together" loading="lazy"></div>
-      <div class="rsvp-copy reveal">
+    <section id="rsvp" class="rsvp section final-arrival">
+      <div class="rsvp-image reveal-scale"><img src="assets/photos/robin-final.jpg" alt="A celebration together" loading="lazy"></div>
+      <div class="rsvp-copy reveal" data-reveal-words>
         <p class="eyebrow">BE WITH US</p>
         <h2>For the vows.<br>For the laughter.<br><em>For our beginning.</em></h2>
         <p>28 November 2026 · Thiruvananthapuram</p>
       </div>
     </section>
+
+    <div class="final-line" aria-hidden="true"><span></span><i>and this is only the beginning</i><span></span></div>
 
     <footer>
       <div class="footer-mark">R <span>&amp;</span> S</div>
