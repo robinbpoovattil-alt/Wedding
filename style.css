@@ -118,3 +118,12 @@ footer{text-align:center;padding:90px 20px 70px;background:var(--paper);border-t
 .then span{transform:none;transition:none}.then i{opacity:1;transform:none;transition:none}
 .final-arrival:after{transition:none}
 }
+
+[data-parallax]{--parallax-y:0px}
+.hero-image[data-parallax]{transform:translate3d(0,var(--parallax-y),0) scale(1.04)}
+.cinematic img[data-parallax]{transform:translate3d(0,var(--parallax-y),0) scale(1.03)}
+.cinematic-copy[data-parallax]{transform:translate3d(0,var(--parallax-y),0)}
+.detail-photos[data-parallax]{transform:translate3d(0,var(--parallax-y),0) rotate(2deg)}
+.detail-photo{opacity:.35;transform:translateY(24px);transition:opacity .9s ease,transform 1.1s cubic-bezier(.2,.7,.2,1)}
+.detail-photo.photo-arrived{opacity:1;transform:translateY(0)}
+.detail-photo-rings.photo-arrived{transform:rotate(-2.5deg)}
