@@ -125,7 +125,7 @@ function updateParallax(){
     if(rect.bottom>0 && rect.top<vh){
       const center=rect.top+rect.height/2;
       const offset=(center-vh/2)*amount*-1;
-      el.style.transform='translate3d(0,'+offset.toFixed(2)+'px,0)';
+      el.style.setProperty('--parallax-y',offset.toFixed(2)+'px');
     }
   });
   ticking=false;
