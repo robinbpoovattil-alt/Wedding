@@ -24,7 +24,7 @@ a{color:inherit;text-decoration:none}
 .invitation{text-align:center;min-height:78vh;display:grid;place-items:center}
 .narrow{max-width:950px;margin:auto}
 .narrow h2{font:400 clamp(43px,5.4vw,78px)/.98 var(--serif);margin:22px 0 45px}
-.narrow h2 em,.day h2 em,.rsvp h2 em,.interlude-text em{font-family:var(--script);font-style:normal;color:#fff;text-shadow:0 3px 25px rgba(0,0,0,.42)}
+.narrow h2 em,.day h2 em,.rsvp h2 em{font-family:var(--script);font-style:normal;color:#5f5148}.interlude-text em{font-family:var(--script);font-style:normal;color:#fff;text-shadow:0 3px 25px rgba(0,0,0,.42)}
 .names{display:flex;justify-content:center;align-items:center;gap:28px;font:400 25px var(--serif)}
 .names b{font-family:var(--script);font-size:32px;font-weight:400}
 .date{position:relative;min-height:108vh;display:grid;grid-template-columns:1fr .55fr;align-items:center;gap:7vw;overflow:hidden}
